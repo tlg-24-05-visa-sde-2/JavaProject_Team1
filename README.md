@@ -1,7 +1,7 @@
 # *Seafood Delake-C & Co*
 
 ## The Roux Crew
-### Lakea Gray, Cortney Babb, DeShon Dixon
+#### Lakea Gray, Cortney Babb, DeShon Dixon
 
 
 
