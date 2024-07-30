@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 public class Controller {
     private static final Table table = new Table();
+    private static final Host host = new Host();
+    private static final Server server = new Server();
     private static final Scanner scanner = new Scanner(System.in);
     private final List<String> menuItems = new ArrayList<>();
 
@@ -48,11 +50,14 @@ public class Controller {
      *
      */
     public void execute() {
+        intro();
         table();
     }
 
-    // temporary
     private void intro() {
+        System.out.println("Welcome to Seafood Delakec!");
+        host.greeting();
+        server.greeting();
     }
 
     private void table() {
