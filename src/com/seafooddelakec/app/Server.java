@@ -1,7 +1,5 @@
-package com.seafooddelakec;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+package com.seafooddelakec.app;
+import com.seafooddelakec.RestaurantEmployee;
 
 /*
  * Server class functions to greet and capture customer's order.

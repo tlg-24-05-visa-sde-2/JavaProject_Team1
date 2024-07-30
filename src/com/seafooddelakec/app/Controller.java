@@ -1,4 +1,6 @@
-package com.seafooddelakec;
+package com.seafooddelakec.app;
+
+import com.seafooddelakec.Table;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +57,6 @@ public class Controller {
     }
 
     private void intro() {
-        System.out.println("Welcome to Seafood Delakec!");
         host.greeting();
         server.greeting();
     }
