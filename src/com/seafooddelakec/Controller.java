@@ -1,6 +1,13 @@
 package com.seafooddelakec;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 public class Controller {
+    private static final Table table = new Table();
+    private static final Scanner scanner = new Scanner(System.in);
+    private final List<String> menuItems = new ArrayList<>();
 
     /* intro()
      * restaurant name displays,
@@ -40,26 +47,43 @@ public class Controller {
      * farewell()
      *
      */
+    public void execute() {
+        table();
+    }
 
     // temporary
     private void intro() {
-    };
+    }
 
     private void table() {
-    };
+        System.out.println();
+        table.displayCombos();
+        System.out.println();
+        System.out.print("Which combo would you like? : ");
+        int comboNumber = scanner.nextInt();
+        String selectedCombo = table.getCombo(comboNumber);
+        menuItems.add(selectedCombo);
+        System.out.println();
+
+        System.out.println();
+        table.displayDrinks();
+        System.out.println();
+        System.out.print("What would you like to drink? : ");
+        int drinkNumber = scanner.nextInt();
+        String selectedDrink = table.getDrink(drinkNumber);
+        menuItems.add(selectedDrink);
+        table.displayOrder(menuItems);
+    }
 
     private void reorder() {
-    };
+    }
 
     private void bill() {
-    };
+    }
 
     private void serverEmoji() {
-    };
+    }
 
     private void farewell() {
-    };
-
-    public void execute() {
     }
 }
