@@ -6,8 +6,13 @@ public class Intro {
         Host host = new Host();
         host.greeting();
 
+        // insert menu board
+
+        // Server greets customer and prompts user to order
         Server server = new Server();
         server.greeting();
+        server.takeOrder();
+        server.submitOrder();
     }
 
 }
