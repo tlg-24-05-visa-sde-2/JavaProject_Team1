@@ -1,6 +1,6 @@
 package com.seafooddelakec;
 
-class Controller {
+public class Controller {
 
     /* intro()
      * restaurant name displays,
@@ -59,4 +59,7 @@ class Controller {
 
     private void farewell() {
     };
+
+    public void execute() {
+    }
 }
