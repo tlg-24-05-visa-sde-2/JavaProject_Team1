@@ -8,9 +8,9 @@ import java.util.Scanner;
 
 public class Controller {
     private static final Table table = new Table();
-    private static final Host host = new Host();
-    private static final Server server = new Server();
-    private static final Scanner scanner = new Scanner(System.in);
+    private final Host host = new Host();
+    private final Server server = new Server();
+    private final Scanner scanner = new Scanner(System.in);
     private final List<String> menuItems = new ArrayList<>();
 
     /* intro()

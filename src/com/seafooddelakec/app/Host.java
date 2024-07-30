@@ -34,7 +34,8 @@ class Host implements RestaurantEmployee {
             String name = prompter.prompt(
                     getClass().getSimpleName() + ": What name is your reservation under?\n",
                     "^[A-Za-z]+(?: [A-Za-z]+)*$",
-                    "Please enter a valid name (only letters and spaces allowed).");
+                    "Invalid input: Please enter a valid name " +
+                            "(only letters and names with space between allowed).\n");
 
             if (!name.trim().isEmpty()) {
                 customerName = name.trim();
