@@ -37,7 +37,7 @@ Finally, the customer departs, concluding their visit to the restaurant.
 
 - Combo Selection:
 
-
+```
     Prompt user to enter a number for their choice
 
     Options:
@@ -47,12 +47,13 @@ Finally, the customer departs, concluding their visit to the restaurant.
     [3] Combo 3: 0.5lb Headless Shrimp, 1lb King Crab
     [4] Combo 4: 1lb Shrimp, 1 cluster Crab Legs
     [5] Combo 5: 6oz Lobster Tail, 1 cluster Crab Legs
+```
 
 
 
 - Drink Selection:
 
-
+```
     Prompt user to enter a number for their choice
 
     Options:
@@ -60,6 +61,7 @@ Finally, the customer departs, concluding their visit to the restaurant.
     [2] Soda
     [3] Beer
     [4] Mixed Drink
+```
 
 - ### Meal Service:
 
@@ -71,8 +73,9 @@ Finally, the customer departs, concluding their visit to the restaurant.
 
   - Server asks if everything is okay
 
-
+```
     Prompt user: Ready to check out or order more?
+```
 
 - ### Payment Process:
 
@@ -82,10 +85,11 @@ Finally, the customer departs, concluding their visit to the restaurant.
     - b. Allow custom tip input
         Server reaction:
 
-
+```
       If custom tip > [specified amount]: Server smiles
 
       If custom tip < [specified amount]: Server looks disappointed
+```
 
 
 
