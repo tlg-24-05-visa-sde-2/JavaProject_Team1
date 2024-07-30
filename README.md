@@ -42,10 +42,10 @@ Finally, the customer departs, concluding their visit to the restaurant.
 
     Options:
 
-    [1] Combo 1: 0.5lb Shrimp, 0.5lb Crawfish
+    [1] Combo 1: 0.5lb Headless Shrimp, 0.5lb Crawfish
     [2] Combo 2: 0.5lb Headless Shrimp, 1 cluster Snow Crab Legs
     [3] Combo 3: 0.5lb Headless Shrimp, 1lb King Crab
-    [4] Combo 4: 1lb Shrimp, 1 cluster Crab Legs
+    [4] Combo 4: 1lb Headless Shrimp, 1 cluster Crab Legs
     [5] Combo 5: 6oz Lobster Tail, 1 cluster Crab Legs
 ```
 
