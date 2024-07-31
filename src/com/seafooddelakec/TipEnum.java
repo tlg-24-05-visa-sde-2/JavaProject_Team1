@@ -1,6 +1,6 @@
 package com.seafooddelakec;
 
-enum TipEnum {
+public enum TipEnum {
     NONE(0.0),
     OKAY(0.12),
     GREAT(0.18),
@@ -20,6 +20,6 @@ enum TipEnum {
 
     @Override
     public String toString() {
-        return String.format("%s: tip:%s", getRate() * 100 + "%.");
+        return String.format(" tip: %.2f%%", getRate() * 100);
     }
 }
