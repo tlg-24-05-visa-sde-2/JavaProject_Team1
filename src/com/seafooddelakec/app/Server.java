@@ -13,25 +13,15 @@ public class Server implements RestaurantEmployee {
     // private fields to access:
     // FoodType Enum (menu item + price)
     // user inputted customer name
-    private final String customerName;
 
-    // constructors for encapsulation
-    public Server() {
-        this.customerName = Host.getCustomerName();
-    }
-
-    public String getCustomerName() {
-        return customerName;
-    }
 
 
     @Override
     public void greeting() {
         String serverName = "Beyonce";
-        // show menu board (from stream file)
 
-        if (getCustomerName() != null && !getCustomerName().isEmpty()) {
-            System.out.println("Server: Hi " + getCustomerName() +
+        if (Host.getCustomerName() != null && !Host.getCustomerName().isEmpty()) {
+            System.out.println("Server: Hi " + Host.getCustomerName() +
                     ", my name is " + serverName + " and I will be your server today.");
         } else {
             System.out.println("Server: Hi, my name is " + serverName + " and I will be your server today.");
