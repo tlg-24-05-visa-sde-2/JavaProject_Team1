@@ -1,35 +1,22 @@
 package com.seafooddelakec.app;
 
-import com.seafooddelakec.Table;
+import com.seafooddelakec.Title;
+import com.seafooddelakec.menu.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Controller {
-    private static final Table table = new Table();
+    private static final Title title = new Title();
+    private static final MenuItemLoader menuItemLoader = new MenuItemLoader();
+    private static final MenuDisplay menuDisplay = new MenuDisplay();
     private static final Host host = new Host();
     private static final Server server = new Server();
     private static final Scanner scanner = new Scanner(System.in);
-    private final List<String> menuItems = new ArrayList<>();
+    private final List<MenuItem> menuItems = new ArrayList<>();
 
-    /* intro()
-     * restaurant name displays,
-     * customer meets host who prompt user to input their name,
-     *
-     * table()
-     * Customer is seated and menu is read and displayed from a csv file
-     * customer meets server
-     *
-     *
-     * Menu items will include prices (potentially using if statements)
-     *
-     * user drink & combo selection prompt
-     * user enters drink & combo codes for each selection,
-     * Prompt1: DRINKS ex. [1]water [2]soda [3]tequila
-     * Prompt2: COMBOS [1]shrimp,corn,potato [2]..
-     *
-     *
+    /* TODO:
      * after first selection is made, customer has option to reorder another selection
      * (repeat previous prompts)
      *
@@ -48,12 +35,15 @@ public class Controller {
      *
      * server responds based on the tip amount selected
      *
-     * farewell()
+     * exit()
      *
      */
     public void execute() {
+        title.display();
+        menuItemLoader.loadMenuItems();
         intro();
-        table();
+        orderFood();
+        bill();
     }
 
     private void intro() {
@@ -61,35 +51,52 @@ public class Controller {
         server.greeting();
     }
 
-    private void table() {
+    private void orderFood() {
+        selectCombo();
+        selectDrink();
+    }
+
+    private void selectCombo() {
         System.out.println();
-        table.displayCombos();
+        menuDisplay.displayCombos();
         System.out.println();
         System.out.print("Which combo would you like? : ");
-        int comboNumber = scanner.nextInt();
-        String selectedCombo = table.getCombo(comboNumber);
+        String input = scanner.nextLine().trim();
+        int comboNumber = Integer.parseInt(input);
+        Combo selectedCombo = Combo.getCombo(comboNumber);
         menuItems.add(selectedCombo);
-        System.out.println();
-
-        System.out.println();
-        table.displayDrinks();
-        System.out.println();
-        System.out.print("What would you like to drink? : ");
-        int drinkNumber = scanner.nextInt();
-        String selectedDrink = table.getDrink(drinkNumber);
-        menuItems.add(selectedDrink);
-        table.displayOrder(menuItems);
+        System.out.println("You selected: " + selectedCombo);
     }
+
+    private void selectDrink() {
+        System.out.println();
+        menuDisplay.displayDrinks();
+        System.out.println();
+        System.out.print("Which drink would you like? : ");
+        String input = scanner.nextLine().trim();
+        int drinkNumber = Integer.parseInt(input);
+        Drink selectedDrink = Drink.getDrink(drinkNumber);
+        menuItems.add(selectedDrink);
+        System.out.println("You selected: " + selectedDrink);
+    }
+
+    public void bill() {
+        System.out.println("\n-------YOUR ORDER-------");
+        double total = 0.0;
+        for (MenuItem item : menuItems) {
+            System.out.printf("%s - $%.2f%n", item.description(), item.price());
+            total += item.price();
+        }
+        System.out.printf("Total: $%.2f%n", total);
+    }
+
 
     private void reorder() {
-    }
-
-    private void bill() {
     }
 
     private void serverEmoji() {
     }
 
-    private void farewell() {
+    private void exit() {
     }
 }
