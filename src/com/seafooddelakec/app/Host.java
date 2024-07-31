@@ -11,7 +11,7 @@ import java.util.Scanner;
  * Once a name is provided, the host leads the customer to a table and provides
  * the customer with a menu. The chat screen is cleared after a valid name is entered.
  */
-class Host implements RestaurantEmployee {
+public class Host implements RestaurantEmployee {
 
     private static String customerName;
 

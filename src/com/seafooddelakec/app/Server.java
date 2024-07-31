@@ -10,11 +10,6 @@ import com.seafooddelakec.RestaurantEmployee;
  * Chat screen should clear
  */
 public class Server implements RestaurantEmployee {
-    // private fields to access:
-    // FoodType Enum (menu item + price)
-    // user inputted customer name
-
-
 
     @Override
     public void greeting() {

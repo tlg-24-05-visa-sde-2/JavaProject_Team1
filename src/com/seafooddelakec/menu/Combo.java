@@ -1,23 +1,27 @@
 package com.seafooddelakec.menu;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import com.apps.util.Prompter;
+
+import java.util.*;
 
 public class Combo implements MenuItem {
     private static final Map<Integer, Combo> combos = new HashMap<>();
+//    private static final MenuDisplay menuDisplay = new MenuDisplay();
+    private final Scanner scanner = new Scanner(System.in);
 
     private final Integer id;
     private final Double price;
     private final String description;
 
-    private Combo(Integer id, Double price, String description) {
+
+    public Combo(Integer id, Double price, String description) {
         this.id = id;
         this.price = price;
         this.description = description;
     }
 
-    public static Combo getCombo(int id) {
+
+    public Combo getCombo(int id) {
         return combos.get(id);
     }
 
@@ -25,7 +29,7 @@ public class Combo implements MenuItem {
         combos.put(id, new Combo(id, price, description));
     }
 
-    public static Collection<Combo> getAllCombos() {
+    public Collection<Combo> getAllCombos() {
         return combos.values();
     }
 
@@ -42,6 +46,11 @@ public class Combo implements MenuItem {
     @Override
     public String description() {
         return description;
+    }
+
+    public static Combo selectCombo(Scanner scanner) {
+        System.out.println("\n--- Combo Menu ---");
+        return (Combo) MenuItem.selectItem(scanner, combos.values());
     }
 
     @Override

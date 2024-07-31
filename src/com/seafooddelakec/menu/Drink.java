@@ -1,17 +1,17 @@
 package com.seafooddelakec.menu;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import com.apps.util.Prompter;
+
+import java.util.*;
 
 public class Drink implements MenuItem {
     private static final Map<Integer, Drink> drinks = new HashMap<>();
-
+    private static final Scanner scanner = new Scanner(System.in);
     private final Integer id;
     private final Double price;
     private final String description;
 
-    private Drink(Integer id, Double price, String description) {
+    public Drink(Integer id, Double price, String description) {
         this.id = id;
         this.price = price;
         this.description = description;
@@ -25,7 +25,7 @@ public class Drink implements MenuItem {
         drinks.put(id, new Drink(id, price, description));
     }
 
-    public static Collection<Drink> getAllDrinks() {
+    public Collection<Drink> getAllDrinks() {
         return drinks.values();
     }
 
@@ -42,6 +42,11 @@ public class Drink implements MenuItem {
     @Override
     public String description() {
         return description;
+    }
+
+    public static Drink selectDrink(Scanner scanner) {
+        System.out.println("\n--- Drink Menu ---");
+        return (Drink) MenuItem.selectItem(scanner, drinks.values());
     }
 
     @Override

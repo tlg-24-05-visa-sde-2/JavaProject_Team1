@@ -4,17 +4,19 @@ import com.seafooddelakec.Title;
 import com.seafooddelakec.menu.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import com.apps.util.Prompter;
 import java.util.Scanner;
 
 public class Controller {
-    private static final Title title = new Title();
-    private static final MenuItemLoader menuItemLoader = new MenuItemLoader();
-    private static final MenuDisplay menuDisplay = new MenuDisplay();
-    private static final Host host = new Host();
-    private static final Server server = new Server();
-    private static final Scanner scanner = new Scanner(System.in);
+    private final Title title = new Title();
+    private final MenuItemLoader menuItemLoader = new MenuItemLoader();
+    private final Host host = new Host();
+    private final Server server = new Server();
+    private final Scanner scanner = new Scanner(System.in);
     private final List<MenuItem> menuItems = new ArrayList<>();
+
 
     /* TODO:
      * after first selection is made, customer has option to reorder another selection
@@ -52,33 +54,35 @@ public class Controller {
     }
 
     private void orderFood() {
-        selectCombo();
-        selectDrink();
+        Combo selectedCombo = Combo.selectCombo(scanner);
+        Drink selectedDrink = Drink.selectDrink(scanner);
+
+        while (true) {
+            System.out.println("Would you like to order food? (y/n)");
+            String input = scanner.nextLine();
+
+            if (input.equalsIgnoreCase("n")) {
+                System.out.println("You selected: " + selectedCombo);
+                System.out.println("You selected: " + selectedDrink);
+                menuItems.add(selectedCombo);
+                menuItems.add(selectedDrink);
+
+                System.out.println("Server: We will send your order to the kitchen and will be out shortly.");
+                System.out.println("...");
+                System.out.println("Server: Here is your order, enjoy!");
+                System.out.println("Server: Here is your bill.");
+                break;
+            } else if (input.equalsIgnoreCase("y")) {
+                selectedCombo = Combo.selectCombo(scanner);
+                selectedDrink = Drink.selectDrink(scanner);
+                menuItems.add(selectedCombo);
+                menuItems.add(selectedDrink);
+            } else {
+                System.out.println("Invalid input!");
+            }
+        }
     }
 
-    private void selectCombo() {
-        System.out.println();
-        menuDisplay.displayCombos();
-        System.out.println();
-        System.out.print("Which combo would you like? : ");
-        String input = scanner.nextLine().trim();
-        int comboNumber = Integer.parseInt(input);
-        Combo selectedCombo = Combo.getCombo(comboNumber);
-        menuItems.add(selectedCombo);
-        System.out.println("You selected: " + selectedCombo);
-    }
-
-    private void selectDrink() {
-        System.out.println();
-        menuDisplay.displayDrinks();
-        System.out.println();
-        System.out.print("Which drink would you like? : ");
-        String input = scanner.nextLine().trim();
-        int drinkNumber = Integer.parseInt(input);
-        Drink selectedDrink = Drink.getDrink(drinkNumber);
-        menuItems.add(selectedDrink);
-        System.out.println("You selected: " + selectedDrink);
-    }
 
     public void bill() {
         System.out.println("\n-------YOUR ORDER-------");
@@ -89,7 +93,6 @@ public class Controller {
         }
         System.out.printf("Total: $%.2f%n", total);
     }
-
 
     private void reorder() {
     }
