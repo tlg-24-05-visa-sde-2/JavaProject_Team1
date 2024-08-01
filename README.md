@@ -109,4 +109,4 @@ Finally, the customer departs, concluding their visit to the restaurant.
 ![UML Diagram](./images/ClassDiagramPaper.jpeg)
 
 ### UML Diagram V2
-![UML Diagram](./images/Class_Diagram_20240801.png)
+![UML Diagram](./images/ClassDiagram_v2.png)
