@@ -6,6 +6,8 @@ import com.apps.util.Prompter;
 
 import java.util.Scanner;
 
+import static com.apps.util.Console.*;
+
 /**
  * Host class functions to greet and capture customer's name.
  * Once a name is provided, the host leads the customer to a table and provides
@@ -28,25 +30,42 @@ public class Host implements RestaurantEmployee {
     public void greeting() {
         Prompter prompter = new Prompter(new Scanner(System.in));
 
-        System.out.println(getClass().getSimpleName() + ": Hi! Welcome to Seafood Delake-C & Co!\n");
+        String serverGreeting = getClass().getSimpleName() + ": Hi! Welcome to Seafood Delake-C & Co!\n";
+
+        blankLines(2);
+
+        for (int i = 0; i < serverGreeting.length(); i++) {
+            System.out.print(serverGreeting.charAt(i));
+            pause(75);
+        }
+        blankLines(1);
+        pause(100);
 
         while (true) {
-            String name = prompter.prompt(
-                    getClass().getSimpleName() + ": What name is your reservation under?\n",
+            String hostGreeting = "Host: What name is your reservation under?\n";
+
+            for (int i = 0; i < hostGreeting.length(); i++) {
+                System.out.print(hostGreeting.charAt(i));
+                pause(75);
+            }
+
+            String nameChoice = prompter.prompt("> ",
                     "^[A-Za-z]+(?: [A-Za-z]+)*$",
                     "Invalid input: Please enter a valid name " +
                             "(only letters and names with space between allowed).\n");
+            blankLines(1);
 
-            if (!name.trim().isEmpty()) {
-                customerName = name.trim();
+            if (!nameChoice.trim().isEmpty()) {
+                customerName = nameChoice.trim();
                 System.out.println(getClass().getSimpleName() + ": Your table is ready, " + customerName +
                         ". Right this way, I will bring you to your table. Take a moment to review the menu.\n");
-                Console.clear();
+                clear();
                 break;
             } else {
                 System.out.println(getClass().getSimpleName() +
                         ": Please enter a valid name to proceed with the reservation.");
             }
         }
+
     }
 }

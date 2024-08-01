@@ -18,6 +18,7 @@ public class Server implements RestaurantEmployee {
         if (Host.getCustomerName() != null && !Host.getCustomerName().isEmpty()) {
             System.out.println("Server: Hi " + Host.getCustomerName() +
                     ", my name is " + serverName + " and I will be your server today.");
+            System.out.println("Take a moment to look over the menu.");
         } else {
             System.out.println("Server: Hi, my name is " + serverName + " and I will be your server today.");
         }

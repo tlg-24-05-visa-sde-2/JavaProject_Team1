@@ -7,42 +7,44 @@ import com.seafooddelakec.menu.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import static com.apps.util.Console.*;
+import com.apps.util.Prompter;
+
 
 public class Controller {
     private final Title title = new Title();
     private final MenuItemLoader menuItemLoader = new MenuItemLoader();
     private final Host host = new Host();
-    private final Server server = new Server();
     private final Scanner scanner = new Scanner(System.in);
+    private final Prompter prompter = new Prompter(new Scanner(System.in));
     private final List<MenuItem> menuItems = new ArrayList<>();
     private TipEnum tipEnum = TipEnum.NONE;
+    private final Server server = new Server();
 
 
     public void execute() {
         title.display();
         menuItemLoader.loadMenuItems();
-        intro();
+        host.greeting();
         orderFood();
         bill();
         pay();
 //        serverExpression();
     }
 
-    private void intro() {
-        host.greeting();
-        server.greeting();
-    }
-
     private void orderFood() {
         Combo selectedCombo = Combo.selectCombo(scanner);
         Drink selectedDrink = Drink.selectDrink(scanner);
 
+        pause(75);
         menuItems.add(selectedCombo);
         menuItems.add(selectedDrink);
 
+
         while (true) {
-            System.out.println("Would you like to order food? (y/n)");
-            String input = scanner.nextLine();
+            System.out.println("Would you like to order more food? (y/n)");
+            String input = prompter.prompt("> ");
+//            String input = scanner.nextLine();
 
             if (input.equalsIgnoreCase("n")) {
                 System.out.println("Server: We will send your order to the kitchen and will be out shortly.");
@@ -65,7 +67,7 @@ public class Controller {
 
 
 
-    public void bill() {
+    private void bill() {
         double TAX_RATE = 0.089;
 
         System.out.println("\n-------YOUR ORDER-------");
@@ -119,43 +121,32 @@ public class Controller {
         double finalTotal = newTotal + result;
         System.out.printf("Final total: $%.2f%n \n", finalTotal);
     }
-
-    public void pay() {
-        System.out.println("Server: Are you ready to pay? [y/n]");
+    // TODO: move to Customer
+    private void pay() {
+        System.out.println("Server: To complete your payment, press Enter.");
         String input = scanner.nextLine();
 
         if (input.equalsIgnoreCase("y")) {
-            System.out.println("Server: You paid successfully!");
-        } else if (input.equalsIgnoreCase("n")) {
-            System.out.println("Server: Would you like to order more? [y/n]");
-            String input2 = scanner.nextLine();
+            System.out.println("Server: You paid successfully! Thank you!");
 
-            if (input2.equalsIgnoreCase("y")) {
-                orderFood();
-                bill();
-            } else if (input2.equalsIgnoreCase("n")) {
-                System.out.println("Server: Let me know when you're ready.");
-            } else {
-                System.out.println("Server: Invalid input. Please enter 'y' or 'n'.");
-            }
         } else {
-            System.out.println("Server: Invalid input. Please enter 'y' or 'n'.");
+            System.out.println("Server: Invalid input. You must press [Enter] key to proceed with payment.");
         }
     }
 
-    private void serverExpression() {
-        System.out.println("Server: ");
-        String input = scanner.nextLine();
-
-        if (input.equalsIgnoreCase("y")) {
-            switch (tipEnum) {
-                case OKAY -> System.out.println(":|");
-                case GREAT -> System.out.println(":)");
-                case EXCELLENT -> System.out.println(":D");
-            }
-        } else if (input.equalsIgnoreCase("n")) {
-            System.out.println(">:(");
-        }
+//    private void serverExpression() {
+//        System.out.println("Server: ");
+//        String input = scanner.nextLine();
+//
+//        if (input.equalsIgnoreCase("y")) {
+//            switch (tipEnum) {
+//                case OKAY -> System.out.println(":|");
+//                case GREAT -> System.out.println(":)");
+//                case EXCELLENT -> System.out.println(":D");
+//            }
+//        } else if (input.equalsIgnoreCase("n")) {
+//            System.out.println(">:(");
+//        }
         // prompt customer if they want to tip
         // if Y, then:
         // display tip percentage options
@@ -170,6 +161,7 @@ public class Controller {
 
         // if N, then:
         //                  NONE: responds >:(
-    }
+    //}
+
 
 }

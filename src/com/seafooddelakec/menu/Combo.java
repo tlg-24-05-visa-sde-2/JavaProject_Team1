@@ -6,8 +6,8 @@ import java.util.*;
 
 public class Combo implements MenuItem {
     private static final Map<Integer, Combo> combos = new HashMap<>();
-//    private static final MenuDisplay menuDisplay = new MenuDisplay();
     private final Scanner scanner = new Scanner(System.in);
+    private final Prompter prompter = new Prompter(new Scanner(System.in));
 
     private final Integer id;
     private final Double price;

@@ -1,8 +1,11 @@
 package com.seafooddelakec;
 
+import static com.apps.util.Console.clear;
+import static com.apps.util.Console.pause;
+
 public class Title {
     public void display() {
-        System.out.println(
+        String titleLogo =
                 """
                                                                 \s
                        84118                                    \s
@@ -46,8 +49,15 @@ public class Title {
 ||  |____/|_____/_/   \\_\\_|   \\___/ \\___/|____/  |____/|_____|_____/_/   \\_\\_|\\_\\_____|     \\____|  \\___/\\/  \\____\\___(_)   ||
 ||                                                                                                                          ||
 \\============================================================================================================================/
-                """);
-        System.out.println();
+                """;
+        for (int i = 0; i < titleLogo.length(); i++) {
+            System.out.print(titleLogo.charAt(i));
+            pause(1);
+        }
+        System.out.print("Loading... ");
+        pause(3000);
+        System.out.println("complete!");
+        pause(1000);
+        clear();
     }
-
 }
