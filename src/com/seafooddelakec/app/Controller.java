@@ -4,10 +4,8 @@ import com.seafooddelakec.TipEnum;
 import com.seafooddelakec.Title;
 import com.seafooddelakec.menu.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import static com.apps.util.Console.*;
 import com.apps.util.Prompter;
 
 
@@ -17,62 +15,64 @@ public class Controller {
     private final Host host = new Host();
     private final Scanner scanner = new Scanner(System.in);
     private final Prompter prompter = new Prompter(new Scanner(System.in));
-    private final List<MenuItem> menuItems = new ArrayList<>();
-    private TipEnum tipEnum = TipEnum.NONE;
-    private final Server server = new Server();
+    private Menu menu;
 
 
     public void execute() {
+        initialize();
         title.display();
-        menuItemLoader.loadMenuItems();
+        menuItemLoader.loadMenu();
         host.greeting();
         orderFood();
         bill();
         pay();
-//        serverExpression();
+    }
+
+    private void initialize() {
+        List<MenuItem> menuItems = menuItemLoader.loadMenu();
+        menu = new Menu(menuItems);
     }
 
     private void orderFood() {
-        Combo selectedCombo = Combo.selectCombo(scanner);
-        Drink selectedDrink = Drink.selectDrink(scanner);
-
-        pause(75);
-        menuItems.add(selectedCombo);
-        menuItems.add(selectedDrink);
-
-
         while (true) {
-            System.out.println("Would you like to order more food? (y/n)");
-            String input = prompter.prompt("> ");
-//            String input = scanner.nextLine();
+            menu.displayMenu();
 
-            if (input.equalsIgnoreCase("n")) {
+            MenuItem selectedItem = null;
+            while (selectedItem == null) {
+                String input = prompter.prompt("Enter the ID of the item you want to order: ");
+                try {
+                    int id = Integer.parseInt(input);
+                    selectedItem = menu.getItemById(id);
+                    if (selectedItem == null) {
+                        System.out.println("Invalid ID. Please try again.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Please enter a valid number.");
+                }
+            }
+
+            menu.addOrderedItem(selectedItem);
+
+            String orderMore = prompter.prompt("Would you like to order more food? (y/n): ");
+            if (orderMore.equalsIgnoreCase("n")) {
                 System.out.println("Server: We will send your order to the kitchen and will be out shortly.");
                 System.out.println("...");
                 System.out.println("Server: Here is your order, enjoy!");
                 System.out.println("Server: Here is your bill.");
                 break;
-            } else if (input.equalsIgnoreCase("y")) {
-                selectedCombo = Combo.selectCombo(scanner);
-                selectedDrink = Drink.selectDrink(scanner);
-                menuItems.add(selectedCombo);
-                menuItems.add(selectedDrink);
-            } else {
-                System.out.println("Invalid input!");
+            } else if (!orderMore.equalsIgnoreCase("y")) {
+                System.out.println("Invalid input! Assuming you want to order more.");
             }
         }
-        System.out.println("You selected: " + selectedCombo);
-        System.out.println("You selected: " + selectedDrink);
     }
-
-
 
     private void bill() {
         double TAX_RATE = 0.089;
+        TipEnum tipEnum;
 
         System.out.println("\n-------YOUR ORDER-------");
         double total = 0.0;
-        for (MenuItem item : menuItems) {
+        for (MenuItem item : menu.getOrderedItems()) {
             System.out.printf("%s - $%.2f%n", item.description(), item.price());
             total += item.price();
         }
@@ -95,24 +95,22 @@ public class Controller {
 
             switch (input2) {
                 case "12.00" -> {
-                    TipEnum tipEnum = TipEnum.OKAY;
+                    tipEnum = TipEnum.OKAY;
                     double okay = result * tipEnum.getRate();
                     newTotal += okay;
                 }
                 case "18.00" -> {
-                    TipEnum tipEnum = TipEnum.GREAT;
+                    tipEnum = TipEnum.GREAT;
                     double great = result * tipEnum.getRate();
                     newTotal += great;
                 }
                 case "20.00" -> {
-                    TipEnum tipEnum = TipEnum.EXCELLENT;
+                    tipEnum = TipEnum.EXCELLENT;
                     double excellent = result * tipEnum.getRate();
                     newTotal += excellent;
                 }
             }
 
-        } else if (input.equalsIgnoreCase("n")) {
-            tipEnum = TipEnum.NONE;
         }
 
         System.out.printf("Tip Amount: $%.2f%n\n", newTotal);
@@ -133,35 +131,5 @@ public class Controller {
             System.out.println("Server: Invalid input. You must press [Enter] key to proceed with payment.");
         }
     }
-
-//    private void serverExpression() {
-//        System.out.println("Server: ");
-//        String input = scanner.nextLine();
-//
-//        if (input.equalsIgnoreCase("y")) {
-//            switch (tipEnum) {
-//                case OKAY -> System.out.println(":|");
-//                case GREAT -> System.out.println(":)");
-//                case EXCELLENT -> System.out.println(":D");
-//            }
-//        } else if (input.equalsIgnoreCase("n")) {
-//            System.out.println(">:(");
-//        }
-        // prompt customer if they want to tip
-        // if Y, then:
-        // display tip percentage options
-        // user can only select from the stated available options
-        // once user selects, the tip will be applied to the total
-        // customer then officially pays for the bill
-
-        // if customer tips:
-        //                  OKAY: responds :|
-        //                  GREAT: responds :)
-        //                  EXCELLENT: responds :D
-
-        // if N, then:
-        //                  NONE: responds >:(
-    //}
-
 
 }
