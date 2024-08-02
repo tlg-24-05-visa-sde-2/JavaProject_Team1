@@ -20,8 +20,7 @@ public class Menu {
         System.out.println();
         displayMenuSection("DRINKS  ", MenuItem.Type.DRINK);
     }
-    // TODO : format menu, for loop to display each row
-    // use """ if we
+
     private void displayMenuSection(String sectionTitle, MenuItem.Type type) {
         String border = "\t   +=====+==========+====================================+";
         String titleFormat = "\t   | %-51s |";
@@ -32,8 +31,7 @@ public class Menu {
         displayAnimatedString(border);
         displayAnimatedString(String.format(titleFormat, sectionTitle));
         displayAnimatedString(border);
-        String formattedHeading = String.format(headerFormat, "id", "price", "description");
-        displayAnimatedString(formattedHeading);
+        displayAnimatedString(String.format(headerFormat, "id", "price", "description"));
         displayAnimatedString(border);
 
         for (MenuItem item : menuItems) {

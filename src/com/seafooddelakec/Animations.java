@@ -6,6 +6,8 @@ public class Animations {
     public void intro() {
         String titleLogo =
                 """
+                                                                                                              \s
+                                                                                                              \s
                                                                   ++++++++                                    \s
                                                                  +++++++++++++                                 \s
                                                                 +++  ++++++++++                                \s
@@ -50,7 +52,7 @@ public class Animations {
             pause(1);
         }
         blankLines(1);
-        System.out.print("Loading");
+        System.out.print(" Loading");
         for (int i = 0; i < 7; i++) {
             System.out.print(".");
             pause(500);
@@ -62,6 +64,8 @@ public class Animations {
     public void host() {
         String hostLogo =
                 """
+                                                                                                     \s
+                                                                                                     \s
                                                     +++++++++++++                                    \s
                                                  ++++++++++++++++++++++                              \s
                                                 ++++++++++++++++++++++++++                           \s
@@ -105,7 +109,6 @@ public class Animations {
                 """
                                                                                                             \s
                                                                                                             \s
-                                                                                                            \s
                         ++++++++++++++                                                         +++++++++++++\s
                         +++++++++++ ++                                                        ++++++++++++ +\s
                          ++++ +++++ +++                                                       ++ +++++ +++++\s
@@ -142,6 +145,7 @@ public class Animations {
     public void server() {
         String serverLogo =
                 """
+                                                                              \s
                                                                               \s
                             ++++++                                            \s
                         +++++++++++++                                         \s
@@ -182,10 +186,8 @@ public class Animations {
     public void food() {
         String foodLogo =
                 """
-                                                                                                     \s
-                                                                                                     \s
-                                                                                                     \s
-                                                                                                                          \s
+                                                                                     \s
+                                                                                     \s
                                          +++++                                       \s
                                     ++++       +++                                   \s
                                    ++             ++                                 \s
@@ -223,10 +225,6 @@ public class Animations {
                           ++    ++     ++            ++          ++                  \s
                           ++    ++     ++            +          ++                   \s
                            +++++                      ++++++++++                     \s
-                                                                                              \s
-                                                                                                                          \s
-                                                                                                     \s
-                                                                                                     \s
                 """;
         for (int i = 0; i < foodLogo.length(); i++) {
             System.out.print(foodLogo.charAt(i));
@@ -237,6 +235,7 @@ public class Animations {
     public void cook() {
         String cookLogo =
                 """
+                                                                                                                             \s
                                                                         +++++                                                \s
                                                                        +++++++++                                             \s
                                                                       +++++++++++++                                          \s
@@ -299,6 +298,8 @@ public class Animations {
     public void finalMeal() {
         String finalMealLogo =
                 """
+                                                                                                                   \s
+                                                                                                                   \s
                                                                                     ++++++++                       \s
                                                                        ++++++ +++++++ ++++++++++                   \s
                                                                   +++++++++++++ +  ++++  +++ +++++                 \s
@@ -339,6 +340,8 @@ public class Animations {
         public void payment() {
             String paymentAnimation =
                     """
+                                                                                                                                               \s
+                                                                                                                                               \s
                                                    ++                       ++ +                                                               \s
                                                    ++                       +  +                                                               \s
                                                    ++                       + ++                                                               \s
@@ -397,7 +400,7 @@ public class Animations {
                 pause(1);
             }
             blankLines(1);
-            System.out.print("Payment processing");
+            System.out.print(" Payment processing");
             for (int i = 0; i < 7; i++) {
                 System.out.print(".");
                 pause(500);

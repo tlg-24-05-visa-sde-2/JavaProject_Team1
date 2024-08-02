@@ -6,6 +6,7 @@ import com.seafooddelakec.menu.*;
 
 import java.util.List;
 import java.util.Scanner;
+
 import com.apps.util.Prompter;
 
 import static com.apps.util.Console.*;
@@ -33,7 +34,7 @@ public class Controller {
 
     private void orderFood() {
         animations.server();
-        String serverIntro = "Server: Hi, my name is Beyonce and I will be your server today! \n ";
+        String serverIntro = " Server: Hi, my name is Beyonce and I will be your server today! \n ";
         for (int i = 0; i < serverIntro.length(); i++) {
             System.out.print(serverIntro.charAt(i));
             pause(1);
@@ -41,59 +42,74 @@ public class Controller {
         pause(3000);
         clear();
 
-        while (true) {
-            menu.displayMenu();
-            blankLines(1);
+        menu.displayMenu();
+        blankLines(2);
 
+        String orderMsg = " Type a number [1-9] to make a selection: ";
+
+        while (true) {
             MenuItem selectedItem = null;
             while (selectedItem == null) {
-                System.out.println(" What would you like to order? Type a number [1-9] to make a section: ");
-                String input = prompter.prompt("> ");
-                clear();
-
+                System.out.println(" What would you like to order? " + orderMsg);
+                String input = prompter.prompt(" > ");
+                blankLines(1);
                 try {
                     int id = Integer.parseInt(input);
                     selectedItem = menu.getItemById(id);
                     if (selectedItem == null) {
-                        System.out.println("Invalid ID. Please try again.");
+                        clear();
+                        menu.displayMenu();
+                        blankLines(1);
+                        System.out.println(orderMsg);
+
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("Please enter a valid number.");
+                    clear();
+                    menu.displayMenu();
+                    blankLines(1);
+                    System.out.println(orderMsg);
                 }
             }
-            clear();
 
             menu.addOrderedItem(selectedItem);
-            System.out.println("Would you like to order something else? [y/n]: ");
-            String orderMore = prompter.prompt("> ");
-            clear();
-            if (orderMore.equalsIgnoreCase("n")) {
-                clear();
-                System.out.println("Server: We will send your order to the kitchen and will be out shortly.");
-                pause(2000);
-                clear();
 
-                animations.cook();
-                pause(1000);
-                clear();
+            boolean validInput = false;
+            while (!validInput) {
+                System.out.println(" Would you like to order something else? [y/n]: ");
+                String orderMore = prompter.prompt(" > ", "^[yYnN]$",
+                        " Invalid input: Please enter 'y' for yes or 'n' for no.\n");
 
-                animations.food();
-                System.out.println("Server: Here is your order, enjoy!");
-                pause(2000);
-                clear();
+                if (orderMore.equalsIgnoreCase("n")) {
+                    clear();
+                    System.out.println(" Server: We will send your order to the kitchen and will be out shortly.");
+                    pause(2000);
+                    clear();
 
-                animations.finalMeal();
-                pause(3000);
-                clear();
+                    animations.cook();
+                    pause(1000);
+                    clear();
 
-                System.out.println("Server: Here is your bill.");
-                break;
-                // TODO : ERROR HANDLING
-            } else if (!orderMore.equalsIgnoreCase("y") && !orderMore.equalsIgnoreCase("n")) {
-                System.out.println("Invalid input! Assuming you want to order more. Please type 'y/n' to make a section.");
+                    animations.food();
+                    blankLines(1);
+                    System.out.println(" Server: Here is your order, enjoy!");
+                    pause(2000);
+                    clear();
+
+                    animations.finalMeal();
+                    pause(3000);
+                    clear();
+
+                    System.out.println(" Server: Here is your bill.");
+                    return;
+                } else if (orderMore.equalsIgnoreCase("y")) {
+                    clear();
+                    menu.displayMenu();
+                    validInput = true;
+                }
             }
         }
     }
+
 
     private void bill() {
         double TAX_RATE = 0.089;
@@ -132,14 +148,16 @@ public class Controller {
         displayAnimatedString(border);
 
         blankLines(2);
-        System.out.println("Server: Would you like to leave a tip? [y/n]");
-        String input = prompter.prompt("> ");
+        System.out.println(" Server: Would you like to leave a tip? [y/n]");
+        String input = prompter.prompt(" > ", "^[yYnN]$",
+                " Invalid input: Please enter 'y' for yes or 'n' for no.\n");
         double tipAmount = 0;
         if (input.equalsIgnoreCase("y")) {
             blankLines(1);
-            System.out.printf("Tip Percentages: [Type 1, 2, or 3]\n\n[1]%s\n[2]%s\n[3]%s\n\n",
+            System.out.printf(" Tip Percentages: [Type 1, 2, or 3]\n\n [1]%s\n [2]%s\n [3]%s\n\n",
                     TipEnum.OKAY, TipEnum.GREAT, TipEnum.EXCELLENT);
-            String input2 = prompter.prompt("> ");
+            String input2 = prompter.prompt(" > ", "^[123]$",
+                    "Invalid input: Please enter '1', '2', or '3'.");
 
             switch (input2) {
                 case "1" -> {
@@ -176,19 +194,17 @@ public class Controller {
 
     private void pay() {
         blankLines(2);
-        System.out.println("Server: To complete your payment, type 'p'.");
-        String input = prompter.prompt("> ");
+        System.out.println(" Server: To complete your payment, type 'p'.");
+        String input = prompter.prompt(" > ", "^[pP]$",
+                " Server: Invalid input. You must type 'p' to proceed with payment.");
         clear();
-        if (!input.equalsIgnoreCase("p")) {
-            System.out.println("Server: Invalid input. You must type 'p' to proceed with payment.");
-            clear();
-        } else {
+        if (input.equalsIgnoreCase("p")) {
             animations.payment();
             clear();
             animations.server();
             blankLines(1);
-            System.out.println("Server: You paid successfully! Thank you!");
-            System.out.println("Server: Be sure to come back again!");
+            System.out.println(" Server: You paid successfully! Thank you!");
+            System.out.println(" Server: Come back again!");
         }
     }
 

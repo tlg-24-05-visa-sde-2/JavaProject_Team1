@@ -35,7 +35,7 @@ public class Host implements RestaurantEmployee {
         ANIMATIONS.host();
         blankLines(1);
 
-        String hostGreeting1 = getClass().getSimpleName() + ": Hi! Welcome to Seafood Delake-C & Co!\n";
+        String hostGreeting1 = " Host: Hi! Welcome to Seafood Delake-C & Co!\n";
 
         for (int i = 0; i < hostGreeting1.length(); i++) {
             System.out.print(hostGreeting1.charAt(i));
@@ -44,7 +44,7 @@ public class Host implements RestaurantEmployee {
         blankLines(1);
         pause(100);
 
-        String hostGreeting2 = "Host: What name is your reservation under?\n";
+        String hostGreeting2 = " Host: What name is your reservation under?\n";
 
         for (int i = 0; i < hostGreeting2.length(); i++) {
             System.out.print(hostGreeting2.charAt(i));
@@ -55,9 +55,9 @@ public class Host implements RestaurantEmployee {
 
         while (true) {
 
-            String nameChoice = prompter.prompt("> ",
+            String nameChoice = prompter.prompt(" > ",
                     "^[A-Za-z]+(?: [A-Za-z]+)*$",
-                    "Invalid input: Please enter a valid name " +
+                    " Invalid input: Please enter a valid name " +
                             "(only letters and names with space between allowed).\n");
             blankLines(1);
 
@@ -65,13 +65,13 @@ public class Host implements RestaurantEmployee {
 
                 customerName = nameChoice.trim();
 
-                System.out.print("Searching");
+                System.out.print(" Searching");
                 for (int i = 0; i < 7; i++) {
                     System.out.print(".");
                     pause(500);
                 }
                 clear();
-                String response = "Host: Your table is ready, " + customerName +
+                String response = " Host: Your table is ready, " + customerName +
                         ". Right this way, I will bring you to your table.";
                 for (int i = 0; i < response .length(); i++) {
                     System.out.print(response .charAt(i));
@@ -83,7 +83,7 @@ public class Host implements RestaurantEmployee {
                 ANIMATIONS.table();
                 blankLines(1);
 
-                String review = "Host: Please take a moment to review the menu. The server will be right with you.";
+                String review = " Host: Please take a moment to review the menu. The server will be right with you.";
                 for (int i = 0; i < review.length(); i++) {
                     System.out.print(review.charAt(i));
                     pause(75);
@@ -92,8 +92,7 @@ public class Host implements RestaurantEmployee {
                 clear();
                 break;
             } else {
-                System.out.println(getClass().getSimpleName() +
-                        ": Please enter a valid name to proceed with the reservation.");
+                System.out.println(" Host: Please enter a valid name to proceed with the reservation.");
             }
         }
 
