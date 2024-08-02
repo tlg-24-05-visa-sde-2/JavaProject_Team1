@@ -73,7 +73,7 @@ public class Controller {
                 System.out.println("Server: Here is your bill.");
                 break;
             } else if (!orderMore.equalsIgnoreCase("y")) {
-                System.out.println("Invalid input! Assuming you want to order more.");
+                System.out.println("Invalid input! Assuming you want to order more. ");
             }
         }
     }
