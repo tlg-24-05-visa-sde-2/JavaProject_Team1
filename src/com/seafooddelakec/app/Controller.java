@@ -68,7 +68,9 @@ public class Controller {
             String orderMore = prompter.prompt("Would you like to order more food? (y/n): ");
             if (orderMore.equalsIgnoreCase("n")) {
                 System.out.println("Server: We will send your order to the kitchen and will be out shortly.");
+                animations.cook();
                 System.out.println("...");
+                animations.food();
                 System.out.println("Server: Here is your order, enjoy!");
                 System.out.println("Server: Here is your bill.");
                 break;
