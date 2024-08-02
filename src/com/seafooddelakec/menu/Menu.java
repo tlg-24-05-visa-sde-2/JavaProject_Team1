@@ -16,20 +16,24 @@ public class Menu {
     }
 
     public void displayMenu() {
-        displayMenuSection("COMBOS", MenuItem.Type.COMBO);
+        displayMenuSection("COMBOS  ", MenuItem.Type.COMBO);
         System.out.println();
-        displayMenuSection("DRINKS", MenuItem.Type.DRINK);
+        displayMenuSection("DRINKS  ", MenuItem.Type.DRINK);
     }
-
+    // TODO : format menu, for loop to display each row
+    // use """ if we
     private void displayMenuSection(String sectionTitle, MenuItem.Type type) {
-        String border = "+=====+==========+======================================+";
-        String titleFormat = "| %-49s |";
-        String itemFormat = "| %-3d | $%-7.2f | %-34s |";
+        String border = "\t   +=====+==========+====================================+";
+        String titleFormat = "\t   | %-51s |";
+        String itemFormat = "\t   | %-3d | $%-7.2f | %-34s |";
+        String headerFormat = "\t   | %-3s | %-8s | %-34s |";
+
 
         displayAnimatedString(border);
         displayAnimatedString(String.format(titleFormat, sectionTitle));
         displayAnimatedString(border);
-        displayAnimatedString("| ID  | Price    | Description                          |");
+        String formattedHeading = String.format(headerFormat, "id", "price", "description");
+        displayAnimatedString(formattedHeading);
         displayAnimatedString(border);
 
         for (MenuItem item : menuItems) {
@@ -47,6 +51,7 @@ public class Menu {
     }
 
     private void displayAnimatedString(String str) {
+        blankLines(1);
         for (int i = 0; i < str.length(); i++) {
             System.out.print(str.charAt(i));
             pause(2);

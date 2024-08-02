@@ -8,8 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 import com.apps.util.Prompter;
 
-import static com.apps.util.Console.blankLines;
-import static com.apps.util.Console.pause;
+import static com.apps.util.Console.*;
 
 
 public class Controller {
@@ -26,6 +25,7 @@ public class Controller {
         menu = new Menu(menuItems);
         animations.intro();
         host.greeting();
+        clear();
         orderFood();
         bill();
         pay();
@@ -35,23 +35,19 @@ public class Controller {
      * THIS IS WHAT CORTNEY WILL TALK ABOUT
      */
     private void orderFood() {
+        animations.server();
+
         while (true) {
             menu.displayMenu();
+            blankLines(1);
 
             MenuItem selectedItem = null;
             while (selectedItem == null) {
-                animations.server();
                 pause(1000);
-                System.out.println(" What would you like want to order? [1-9]: ");
+                System.out.println(" What would you like to order? Type a number [1-9] to make a section: ");
                 String input = prompter.prompt("> ");
-                blankLines(2);
+                clear();
 
-                for (int i = 0; i < input.length(); i++) {
-                    System.out.print(input.charAt(i));
-                    pause(75);
-                }
-                blankLines(1);
-                pause(100);
                 try {
                     int id = Integer.parseInt(input);
                     selectedItem = menu.getItemById(id);
@@ -62,20 +58,33 @@ public class Controller {
                     System.out.println("Please enter a valid number.");
                 }
             }
+            clear();
 
             menu.addOrderedItem(selectedItem);
+            System.out.println("Would you like to order something else? [y/n]: ");
+            String orderMore = prompter.prompt("> ");
 
-            String orderMore = prompter.prompt("Would you like to order more food? (y/n): ");
             if (orderMore.equalsIgnoreCase("n")) {
+                clear();
                 System.out.println("Server: We will send your order to the kitchen and will be out shortly.");
+                pause(1000);
+                clear();
+
                 animations.cook();
-                System.out.println("...");
+                pause(1000);
+                clear();
+
                 animations.food();
                 System.out.println("Server: Here is your order, enjoy!");
+                pause(1000);
+                clear();
+
+
                 System.out.println("Server: Here is your bill.");
                 break;
-            } else if (!orderMore.equalsIgnoreCase("y")) {
-                System.out.println("Invalid input! Assuming you want to order more. ");
+                // TODO : ERROR HANDLING
+            } else if (!orderMore.equalsIgnoreCase("y") && !orderMore.equalsIgnoreCase("n")) {
+                System.out.println("Invalid input! Assuming you want to order more. Please type 'y/n' to make a section.");
             }
         }
     }
@@ -89,6 +98,8 @@ public class Controller {
         TipEnum tipEnum;
 
         System.out.println("\n-------YOUR ORDER-------");
+        blankLines(1);
+        // TODO:
         double total = 0.0;
         for (MenuItem item : menu.getOrderedItems()) {
             System.out.printf("%s - $%.2f%n", item.description(), item.price());
@@ -137,16 +148,15 @@ public class Controller {
         double finalTotal = newTotal + result;
         System.out.printf("Final total: $%.2f%n \n", finalTotal);
     }
-    // TODO: move to Customer
+
     private void pay() {
-        System.out.println("Server: To complete your payment, press Enter.");
+        System.out.println("Server: To complete your payment, type 'p'.");
         String input = scanner.nextLine();
 
-        if (input.equalsIgnoreCase("y")) {
-            System.out.println("Server: You paid successfully! Thank you!");
-
+        if (!input.equalsIgnoreCase("p")) {
+            System.out.println("Server: Invalid input. You must type 'p' to proceed with payment.");
         } else {
-            System.out.println("Server: Invalid input. You must press [Enter] key to proceed with payment.");
+            System.out.println("Server: You paid successfully! Thank you!");
         }
     }
 

@@ -32,25 +32,28 @@ public class Host implements RestaurantEmployee {
     public void greeting() {
         Prompter prompter = new Prompter(new Scanner(System.in));
 
-        String serverGreeting = getClass().getSimpleName() + ": Hi! Welcome to Seafood Delake-C & Co!\n";
+        ANIMATIONS.host();
+        blankLines(1);
 
-        blankLines(2);
+        String hostGreeting1 = getClass().getSimpleName() + ": Hi! Welcome to Seafood Delake-C & Co!\n";
 
-        for (int i = 0; i < serverGreeting.length(); i++) {
-            System.out.print(serverGreeting.charAt(i));
+        for (int i = 0; i < hostGreeting1.length(); i++) {
+            System.out.print(hostGreeting1.charAt(i));
             pause(25);
         }
         blankLines(1);
         pause(100);
 
-        while (true) {
-            ANIMATIONS.host();
-            String hostGreeting = "Host: What name is your reservation under?\n";
+        String hostGreeting2 = "Host: What name is your reservation under?\n";
 
-            for (int i = 0; i < hostGreeting.length(); i++) {
-                System.out.print(hostGreeting.charAt(i));
-                pause(25);
-            }
+        for (int i = 0; i < hostGreeting2.length(); i++) {
+            System.out.print(hostGreeting2.charAt(i));
+            pause(25);
+        }
+
+        blankLines(1);
+
+        while (true) {
 
             String nameChoice = prompter.prompt("> ",
                     "^[A-Za-z]+(?: [A-Za-z]+)*$",
@@ -59,27 +62,33 @@ public class Host implements RestaurantEmployee {
             blankLines(1);
 
             if (!nameChoice.trim().isEmpty()) {
-                customerName = nameChoice.trim();
 
-                String response = "Host: Your table is ready, " + customerName +
-                        ". Right this way, I will bring you to your table.";
+                customerName = nameChoice.trim();
 
                 System.out.print("Searching");
                 for (int i = 0; i < 7; i++) {
                     System.out.print(".");
                     pause(500);
                 }
-                pause(1000);
                 clear();
-
-                blankLines(1);
-
+                String response = "Host: Your table is ready, " + customerName +
+                        ". Right this way, I will bring you to your table.";
                 for (int i = 0; i < response .length(); i++) {
                     System.out.print(response .charAt(i));
-                    pause(25);
+                    pause(75);
                 }
-                blankLines(1);
+                pause(2000);
+                clear();
+
                 ANIMATIONS.table();
+                blankLines(1);
+
+                String review = "Host: Please take a moment to review the menu. The server will be right with you.";
+                for (int i = 0; i < review.length(); i++) {
+                    System.out.print(review.charAt(i));
+                    pause(75);
+                }
+                pause(1000);
                 clear();
                 break;
             } else {

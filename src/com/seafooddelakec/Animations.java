@@ -6,8 +6,6 @@ public class Animations {
     public void intro() {
         String titleLogo =
                 """
-                                                                                                              \s
-                                                                                                              \s
                                                                   ++++++++                                    \s
                                                                  +++++++++++++                                 \s
                                                                 +++  ++++++++++                                \s
@@ -103,7 +101,7 @@ public class Animations {
     }
 
     public void table() {
-        String hostLogo =
+        String tableLogo =
                 """
                                                                                                             \s
                                                                                                             \s
@@ -135,70 +133,45 @@ public class Animations {
                                                                                                             \s
                                                                                                             \s
                 """;
-        for (int i = 0; i < hostLogo.length(); i++) {
-            System.out.print(hostLogo.charAt(i));
+        for (int i = 0; i < tableLogo.length(); i++) {
+            System.out.print(tableLogo.charAt(i));
             pause(1);
         }
-
-        String review = "Host: Please take a moment to review the menu. The server will be right with you.";
-        for (int i = 0; i < review.length(); i++) {
-            System.out.print(review.charAt(i));
-            pause(15);
-        }
-        blankLines(2);
-        pause(000);
     }
 
     public void server() {
         String serverLogo =
                 """
-                                                                                                     \s
-                                                                                                     \s
-                                                                                                     \s
-                                                                                                                          \s
-                                                                                                             \s
-                                                                                                             \s
-                                       ++++++++++++                                                          \s
-                                    ++++      ++++++++                                                       \s
-                                  +++ +++++++++    +++++                                                     \s
-                                 +++++++++++          +++                                                    \s
-                                ++++++++++++++         ++++++++++++++                                        \s
-                               ++ ++++++++++++++  ++++     +++++++++++++++                                   \s
-                               +++++++++++++++++++         +++++++++++++++++++                               \s
-                               +++++++++++++++            ++++++++++++++++++++++                             \s
-                               +++++++++++++           +++++++++++++++++++++++++++                           \s
-                               +++++++++++  ++++++++++++++++++    ++++++++++++++++++                         \s
-                               ++++++++++ +++  +++++       +++++++++   ++++++++++++++                        \s
-                               +++++++++ +++++++++                +++++   ++++++++++++                       \s
-                                +++++++ ++++ +++                     ++++++  ++++++++++                      \s
-                                ++++++  +++++++                        ++++++  +++++++++                     \s
-                                ++++++ ++++++++                          +++++++ ++++ +++                    \s
-                                 ++++ ++ +++++                            +++++++  ++ +++                    \s
-                                 ++++ ++ + +++                              +++++++   +++                    \s
-                                +++++ ++  +++    +++++++             +++++++ ++++++++++++                    \s
-                               ++++++ +++++++         ++             +        +++++++ +++                    \s
-                            +++++++++  +++++                                   ++++++++ +                    \s
-                          +++++++++++  ++++        + +++              + +++      ++++++ +                    \s
-                         +++++++++++++ ++            +++                +++         +++++                    \s
-                        ++++++++++++++++++        ++++++             ++++++         +++++                    \s
-                        ++++++++++++     +         +++                +++          ++     +                  \s
-                        +++++++++++  ++  ++     +    ++      +++++      ++   +     +   +  ++                 \s
-                         ++++++++++    ++++                                        ++++    +                 \s
-                          ++++++++++   +  +                 +++++++                +  +  ++                  \s
-                           ++++++++++++   ++                                      ++++++++                   \s
-                           ++++++++++++++++++                                   ++                           \s
-                           +++++++++++++++++++++                              ++                             \s
-                            ++++++++++++++++++  ++++                      ++++                               \s
-                               +++++++++++++        +++++++        +++++++                                   \s
-                                                 ++++     +++++++++      ++++                                \s
-                                              +++    +      ++  ++      +    ++                              \s
-                                             ++       ++      ++      ++       ++                            \s
-                                            ++         ++   ++++++   ++         ++                           \s
-                                                                                                             \s
-                                                                                              \s
-                                                                                                                          \s
-                                                                                                     \s
-                                                                                                     \s
+                                                                              \s
+                            ++++++                                            \s
+                        +++++++++++++                                         \s
+                      +++++++++     +++                                       \s
+                     +++++++++        ++                                      \s
+                    +++++++++++++ ++++ +++++++++++++                          \s
+                   ++++++++++++++        ++++++++++++++                       \s
+                   +++++++++++         +++++++++++++++++++                    \s
+                   +++++++++  +++++++++++++++  ++++++++++++                   \s
+                    +++++++ ++  +++        ++++++  ++++++++++                 \s
+                    ++++++ ++ +++               ++++  ++++++++                \s
+                    +++++ ++++++                  ++++  ++++++                \s
+                     +++++++ ++                    ++++++ ++ ++               \s
+                     +++ + + ++                      +++++   ++               \s
+                     +++ +  +++  +++++          +++++ ++++++++++              \s
+                   +++++ +++++                         +++++ +++              \s
+                 +++++++  +++      +++           +++     +++++++              \s
+               +++++++++++++      + +++            ++       +++               \s
+               +++++++++   +      +++++          ++++      ++  +              \s
+              +++++++++         +  +++    ++++    ++  +    +    +             \s
+               ++++++++  ++++                              + +  +             \s
+                 +++++++  + +             ++++            + ++ ++             \s
+                 +++++++++++++                           ++                   \s
+                 +++++++++++++++++                    +++                     \s
+                  ++++++++++++    ++++++        ++++++                        \s
+                       +++        +++  +++++++++   +++                        \s
+                               ++   +     +  +    +    +                      \s
+                              +      ++    +     +      ++                    \s
+              \s
+                                                                                 \s
                 """;
         for (int i = 0; i < serverLogo.length(); i++) {
             System.out.print(serverLogo.charAt(i));
@@ -210,9 +183,8 @@ public class Animations {
             System.out.print(serverIntro.charAt(i));
             pause(1);
         }
-        pause(1000);
-        blankLines(1);
-
+        pause(2000);
+        clear();
     }
 
     public void food() {
@@ -268,9 +240,6 @@ public class Animations {
             System.out.print(foodLogo.charAt(i));
             pause(1);
         }
-        pause(1000);
-        blankLines(1);
-
     }
 
     public void cook() {
@@ -338,13 +307,10 @@ public class Animations {
                                                                                                      \s
                                                                                                      \s
                 """;
-        for (int i = 0; i < cookLogo.length(); i++) {
-            System.out.print(cookLogo.charAt(i));
+        for (int j = 0; j < cookLogo.length(); j++) {
+            System.out.print(cookLogo.charAt(j));
             pause(1);
         }
-        pause(1000);
-        blankLines(1);
-
     }
 
 }
