@@ -31,9 +31,7 @@ public class Controller {
         pay();
     }
 
-    /*
-     * THIS IS WHAT CORTNEY WILL TALK ABOUT
-     */
+
     private void orderFood() {
         animations.server();
 
@@ -43,7 +41,6 @@ public class Controller {
 
             MenuItem selectedItem = null;
             while (selectedItem == null) {
-                pause(1000);
                 System.out.println(" What would you like to order? Type a number [1-9] to make a section: ");
                 String input = prompter.prompt("> ");
                 clear();
@@ -67,7 +64,7 @@ public class Controller {
             if (orderMore.equalsIgnoreCase("n")) {
                 clear();
                 System.out.println("Server: We will send your order to the kitchen and will be out shortly.");
-                pause(1000);
+                pause(2000);
                 clear();
 
                 animations.cook();
@@ -76,9 +73,12 @@ public class Controller {
 
                 animations.food();
                 System.out.println("Server: Here is your order, enjoy!");
-                pause(1000);
+                pause(1500);
                 clear();
 
+                animations.finalMeal();
+                pause(3000);
+                clear();
 
                 System.out.println("Server: Here is your bill.");
                 break;
@@ -89,65 +89,82 @@ public class Controller {
         }
     }
 
-
-    /*
-     * THIS IS WHAT KEA WILL TALK ABOUT
-     */
     private void bill() {
         double TAX_RATE = 0.089;
         TipEnum tipEnum;
 
-        System.out.println("\n-------YOUR ORDER-------");
-        blankLines(1);
-        // TODO:
+        String border = "\t   +=====+==========+====================================+";
+        String titleFormat = "\t   | %-51s |";
+        String itemFormat = "\t   | %-3d | $%-7.2f | %-34s |";
+        String headerFormat = "\t   | %-3s | %-8s | %-34s |";
+        String totalFormat = "\t   | %-3s | $%-7.2f | %-34s |";
+
+        displayAnimatedString(border);
+        displayAnimatedString(String.format(titleFormat, "YOUR ORDER"));
+        displayAnimatedString(border);
+        displayAnimatedString(String.format(headerFormat, "id", "price", "description"));
+        displayAnimatedString(border);
+
         double total = 0.0;
         for (MenuItem item : menu.getOrderedItems()) {
-            System.out.printf("%s - $%.2f%n", item.description(), item.price());
+            String description = item.description();
+            if (description.length() > 34) {
+                description = description.substring(0, 31) + "...";
+            }
+            displayAnimatedString(String.format(itemFormat, item.id(), item.price(), description));
             total += item.price();
         }
-        System.out.printf("Total (before tax): $%.2f%n", total);
+
+        displayAnimatedString(border);
+        displayAnimatedString(String.format(totalFormat, "", total, "Subtotal"));
+
         double salesTax = total * TAX_RATE;
-        double result = salesTax + total;
+        displayAnimatedString(String.format(totalFormat, "", salesTax, "Sales Tax"));
 
-        System.out.printf("Sales Tax: $%.2f%n", salesTax);
+        double result = total + salesTax;
+        displayAnimatedString(String.format(totalFormat, "", result, "Total"));
+        displayAnimatedString(border);
 
-        System.out.printf("Total (after): $%.2f%n", result);
-
-        System.out.println("Server: Would you like to leave a tip?");
+        blankLines(1);
+        System.out.println("Server: Would you like to leave a tip? (y/n)");
         String input = scanner.nextLine();
-
-        double newTotal = 0;
+        double tipAmount = 0;
         if (input.equalsIgnoreCase("y")) {
             System.out.println("Tip Percentages: " + TipEnum.OKAY + TipEnum.GREAT + TipEnum.EXCELLENT);
-
             String input2 = scanner.nextLine();
 
             switch (input2) {
                 case "12.00" -> {
                     tipEnum = TipEnum.OKAY;
-                    double okay = result * tipEnum.getRate();
-                    newTotal += okay;
+                    tipAmount = result * tipEnum.getRate();
                 }
                 case "18.00" -> {
                     tipEnum = TipEnum.GREAT;
-                    double great = result * tipEnum.getRate();
-                    newTotal += great;
+                    tipAmount = result * tipEnum.getRate();
                 }
                 case "20.00" -> {
                     tipEnum = TipEnum.EXCELLENT;
-                    double excellent = result * tipEnum.getRate();
-                    newTotal += excellent;
+                    tipAmount = result * tipEnum.getRate();
                 }
             }
 
+            displayAnimatedString(border);
+            displayAnimatedString(String.format(totalFormat, "", tipAmount, "Tip Amount"));
+            double finalTotal = result + tipAmount;
+            displayAnimatedString(String.format(totalFormat, "", finalTotal, "Final Total"));
+            displayAnimatedString(border);
         }
-
-        System.out.printf("Tip Amount: $%.2f%n\n", newTotal);
-        // the newTotal is holding the tip decision, result is the previous total
-        // finalTotal is the previous total + tip decision
-        double finalTotal = newTotal + result;
-        System.out.printf("Final total: $%.2f%n \n", finalTotal);
     }
+
+    private void displayAnimatedString(String str) {
+        blankLines(1);
+        for (int i = 0; i < str.length(); i++) {
+            System.out.print(str.charAt(i));
+            pause(2);
+        }
+        System.out.println();
+    }
+
 
     private void pay() {
         System.out.println("Server: To complete your payment, type 'p'.");
