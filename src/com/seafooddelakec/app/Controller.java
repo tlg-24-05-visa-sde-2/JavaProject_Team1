@@ -1,45 +1,57 @@
 package com.seafooddelakec.app;
 
 import com.seafooddelakec.TipEnum;
-import com.seafooddelakec.Title;
+import com.seafooddelakec.Animations;
 import com.seafooddelakec.menu.*;
 
 import java.util.List;
 import java.util.Scanner;
 import com.apps.util.Prompter;
 
+import static com.apps.util.Console.blankLines;
+import static com.apps.util.Console.pause;
+
 
 public class Controller {
-    private final Title title = new Title();
+    private final Animations animations = new Animations();
     private final MenuItemLoader menuItemLoader = new MenuItemLoader();
     private final Host host = new Host();
     private final Scanner scanner = new Scanner(System.in);
     private final Prompter prompter = new Prompter(new Scanner(System.in));
+    private final List<MenuItem> menuItems = menuItemLoader.loadMenu();
     private Menu menu;
 
 
     public void execute() {
-        initialize();
-        title.display();
-        menuItemLoader.loadMenu();
+        menu = new Menu(menuItems);
+        animations.intro();
         host.greeting();
         orderFood();
         bill();
         pay();
     }
 
-    private void initialize() {
-        List<MenuItem> menuItems = menuItemLoader.loadMenu();
-        menu = new Menu(menuItems);
-    }
-
+    /*
+     * THIS IS WHAT CORTNEY WILL TALK ABOUT
+     */
     private void orderFood() {
         while (true) {
             menu.displayMenu();
 
             MenuItem selectedItem = null;
             while (selectedItem == null) {
-                String input = prompter.prompt("Enter the ID of the item you want to order: ");
+                animations.server();
+                pause(1000);
+                System.out.println(" What would you like want to order? [1-9]: ");
+                String input = prompter.prompt("> ");
+                blankLines(2);
+
+                for (int i = 0; i < input.length(); i++) {
+                    System.out.print(input.charAt(i));
+                    pause(75);
+                }
+                blankLines(1);
+                pause(100);
                 try {
                     int id = Integer.parseInt(input);
                     selectedItem = menu.getItemById(id);
@@ -66,6 +78,10 @@ public class Controller {
         }
     }
 
+
+    /*
+     * THIS IS WHAT KEA WILL TALK ABOUT
+     */
     private void bill() {
         double TAX_RATE = 0.089;
         TipEnum tipEnum;

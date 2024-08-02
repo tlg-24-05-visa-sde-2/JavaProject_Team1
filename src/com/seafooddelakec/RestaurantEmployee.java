@@ -1,7 +1,6 @@
 package com.seafooddelakec;
 
+// TODO: MOST LIKELY REMOVE THIS
 public interface RestaurantEmployee {
-
-    // greeting to customer (varies between host and server)
     void greeting();
 }
