@@ -15,7 +15,6 @@ public class Controller {
     private final Animations animations = new Animations();
     private final MenuItemLoader menuItemLoader = new MenuItemLoader();
     private final Host host = new Host();
-    private final Scanner scanner = new Scanner(System.in);
     private final Prompter prompter = new Prompter(new Scanner(System.in));
     private final List<MenuItem> menuItems = menuItemLoader.loadMenu();
     private Menu menu;
@@ -34,6 +33,13 @@ public class Controller {
 
     private void orderFood() {
         animations.server();
+        String serverIntro = "Server: Hi, my name is Beyonce and I will be your server today! \n ";
+        for (int i = 0; i < serverIntro.length(); i++) {
+            System.out.print(serverIntro.charAt(i));
+            pause(1);
+        }
+        pause(3000);
+        clear();
 
         while (true) {
             menu.displayMenu();
@@ -60,7 +66,7 @@ public class Controller {
             menu.addOrderedItem(selectedItem);
             System.out.println("Would you like to order something else? [y/n]: ");
             String orderMore = prompter.prompt("> ");
-
+            clear();
             if (orderMore.equalsIgnoreCase("n")) {
                 clear();
                 System.out.println("Server: We will send your order to the kitchen and will be out shortly.");
@@ -73,7 +79,7 @@ public class Controller {
 
                 animations.food();
                 System.out.println("Server: Here is your order, enjoy!");
-                pause(1500);
+                pause(2000);
                 clear();
 
                 animations.finalMeal();
@@ -100,7 +106,7 @@ public class Controller {
         String totalFormat = "\t   | %-3s | $%-7.2f | %-34s |";
 
         displayAnimatedString(border);
-        displayAnimatedString(String.format(titleFormat, "YOUR ORDER"));
+        displayAnimatedString(String.format(titleFormat, "BILL"));
         displayAnimatedString(border);
         displayAnimatedString(String.format(headerFormat, "id", "price", "description"));
         displayAnimatedString(border);
@@ -125,24 +131,26 @@ public class Controller {
         displayAnimatedString(String.format(totalFormat, "", result, "Total"));
         displayAnimatedString(border);
 
-        blankLines(1);
-        System.out.println("Server: Would you like to leave a tip? (y/n)");
-        String input = scanner.nextLine();
+        blankLines(2);
+        System.out.println("Server: Would you like to leave a tip? [y/n]");
+        String input = prompter.prompt("> ");
         double tipAmount = 0;
         if (input.equalsIgnoreCase("y")) {
-            System.out.println("Tip Percentages: " + TipEnum.OKAY + TipEnum.GREAT + TipEnum.EXCELLENT);
-            String input2 = scanner.nextLine();
+            blankLines(1);
+            System.out.printf("Tip Percentages: [Type 1, 2, or 3]\n\n[1]%s\n[2]%s\n[3]%s\n\n",
+                    TipEnum.OKAY, TipEnum.GREAT, TipEnum.EXCELLENT);
+            String input2 = prompter.prompt("> ");
 
             switch (input2) {
-                case "12.00" -> {
+                case "1" -> {
                     tipEnum = TipEnum.OKAY;
                     tipAmount = result * tipEnum.getRate();
                 }
-                case "18.00" -> {
+                case "2" -> {
                     tipEnum = TipEnum.GREAT;
                     tipAmount = result * tipEnum.getRate();
                 }
-                case "20.00" -> {
+                case "3" -> {
                     tipEnum = TipEnum.EXCELLENT;
                     tipAmount = result * tipEnum.getRate();
                 }
@@ -167,13 +175,20 @@ public class Controller {
 
 
     private void pay() {
+        blankLines(2);
         System.out.println("Server: To complete your payment, type 'p'.");
-        String input = scanner.nextLine();
-
+        String input = prompter.prompt("> ");
+        clear();
         if (!input.equalsIgnoreCase("p")) {
             System.out.println("Server: Invalid input. You must type 'p' to proceed with payment.");
+            clear();
         } else {
+            animations.payment();
+            clear();
+            animations.server();
+            blankLines(1);
             System.out.println("Server: You paid successfully! Thank you!");
+            System.out.println("Server: Be sure to come back again!");
         }
     }
 
