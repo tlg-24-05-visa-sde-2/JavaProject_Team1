@@ -112,7 +112,6 @@ public class Controller {
 
 
     private void bill() {
-        double TAX_RATE = 0.089;
         TipEnum tipEnum;
 
         String border = "\t   +=====+==========+====================================+";
@@ -140,6 +139,7 @@ public class Controller {
         displayAnimatedString(border);
         displayAnimatedString(String.format(totalFormat, "", total, "Subtotal"));
 
+        double TAX_RATE = 0.089;
         double salesTax = total * TAX_RATE;
         displayAnimatedString(String.format(totalFormat, "", salesTax, "Sales Tax"));
 

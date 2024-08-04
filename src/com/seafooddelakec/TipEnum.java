@@ -1,6 +1,5 @@
 package com.seafooddelakec;
 
-// TODO: Mostly like remove the tip enum
 public enum TipEnum {
     NONE(0.0),
     OKAY(0.12),

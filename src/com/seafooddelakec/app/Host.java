@@ -14,7 +14,6 @@ import static com.apps.util.Console.*;
  * the customer with a menu. The chat screen is cleared after a valid name is entered.
  */
 
-// TODO: MOST LIKELY MOVE TO CONTROLLER
 public class Host implements RestaurantEmployee {
     private final static Animations ANIMATIONS = new Animations();
     private static String customerName;
