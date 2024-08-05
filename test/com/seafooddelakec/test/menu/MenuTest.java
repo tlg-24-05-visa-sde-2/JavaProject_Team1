@@ -2,20 +2,23 @@ package com.seafooddelakec.test.menu;
 
 import com.seafooddelakec.menu.Menu;
 import com.seafooddelakec.menu.MenuItem;
-import org.junit.jupiter.api.*;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static junit.framework.TestCase.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
-class MenuTest {
+public class MenuTest {
 
     private Menu menu;
     private List<MenuItem> testMenuItems;
 
-    @BeforeEach
-    void setUp() {
+    @Before
+    public void setUp() {
         testMenuItems = Arrays.asList(
                 new MenuItem(1, 17.00, "Combo 1", MenuItem.Type.COMBO),
                 new MenuItem(2, 24.00, "Combo 2", MenuItem.Type.COMBO),
@@ -26,21 +29,21 @@ class MenuTest {
     }
 
     @Test
-    void testGetItemById_ExistingItem() {
+    public void testGetItemById_ExistingItem() {
         MenuItem item = menu.getItemById(2);
         assertNotNull(item);
-        assertEquals(2, item.id());
+        assertEquals(2, item.id(), .001);
         assertEquals("Combo 2", item.description());
     }
 
     @Test
-    void testGetItemById_NonExistingItem() {
+    public void testGetItemById_NonExistingItem() {
         MenuItem item = menu.getItemById(10);
         assertNull(item);
     }
 
     @Test
-    void testAddOrderedItem() {
+    public void testAddOrderedItem() {
         MenuItem item = testMenuItems.get(0);
         menu.addOrderedItem(item);
         List<MenuItem> orderedItems = menu.getOrderedItems();
@@ -49,7 +52,7 @@ class MenuTest {
     }
 
     @Test
-    void testGetOrderedItems_ReturnsCopy() {
+    public void testGetOrderedItems_ReturnsCopy() {
         MenuItem item = testMenuItems.get(0);
         menu.addOrderedItem(item);
         List<MenuItem> orderedItems = menu.getOrderedItems();

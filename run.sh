@@ -1,3 +1,1 @@
-clear
-
-java -classpath out/production/JavaProject_Team1:"lib/*" com.seafooddelakec.client.Main
+java -classpath seafooddelakec-1.0.jar:"lib/*" com.seafooddelakec.client.Main

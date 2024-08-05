@@ -2,24 +2,25 @@ package com.seafooddelakec.test.menu;
 
 import com.seafooddelakec.menu.MenuItem;
 import com.seafooddelakec.menu.MenuItemLoader;
-import org.junit.jupiter.api.*;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.List;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-class MenuItemLoaderTest {
+public class MenuItemLoaderTest {
 
     private MenuItemLoader loader;
 
-    @BeforeEach
-    void setUp() {
+    @Before
+    public void setUp() {
         loader = new MenuItemLoader();
     }
 
     @Test
-    void testLoadMenu_Success() {
+    public void testLoadMenu_Success() {
         List<MenuItem> menuItems = loader.loadMenu();
 
         assertEquals(9, menuItems.size());
@@ -30,7 +31,7 @@ class MenuItemLoaderTest {
     }
 
     @Test
-    void testLoadMenu_VerifyAllItems() {
+    public void testLoadMenu_VerifyAllItems() {
         List<MenuItem> menuItems = loader.loadMenu();
 
         MenuItem[] expectedItems = {
@@ -49,7 +50,7 @@ class MenuItemLoaderTest {
     }
 
     @Test
-    void testLoadMenu_VerifyCombos() {
+    public void testLoadMenu_VerifyCombos() {
         List<MenuItem> menuItems = loader.loadMenu();
         List<MenuItem> combos = new ArrayList<>();
 
@@ -72,7 +73,7 @@ class MenuItemLoaderTest {
     }
 
     @Test
-    void testLoadMenu_VerifyDrinks() {
+    public void testLoadMenu_VerifyDrinks() {
         List<MenuItem> menuItems = loader.loadMenu();
         List<MenuItem> drinks = new ArrayList<>();
 
