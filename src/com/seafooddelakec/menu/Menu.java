@@ -27,12 +27,11 @@ public class Menu {
         String itemFormat = "\t   | %-3d | $%-7.2f | %-34s |";
         String headerFormat = "\t   | %-3s | %-8s | %-34s |";
 
-
-        displayAnimatedString(border);
-        displayAnimatedString(String.format(titleFormat, sectionTitle));
-        displayAnimatedString(border);
-        displayAnimatedString(String.format(headerFormat, "id", "price", "description"));
-        displayAnimatedString(border);
+        System.out.println(border);
+        System.out.printf((titleFormat) + "%n", sectionTitle);
+        System.out.println(border);
+        System.out.printf((headerFormat) + "%n", "id", "price", "description");
+        System.out.println(border);
 
         for (MenuItem item : menuItems) {
             if (item.type() == type) {
@@ -42,19 +41,10 @@ public class Menu {
                 }
                 String formattedItem = String.format(itemFormat,
                         item.id(), item.price(), description);
-                displayAnimatedString(formattedItem);
+                System.out.println(formattedItem);
             }
         }
-        displayAnimatedString(border);
-    }
-
-    private void displayAnimatedString(String str) {
-        blankLines(1);
-        for (int i = 0; i < str.length(); i++) {
-            System.out.print(str.charAt(i));
-            pause(2);
-        }
-        System.out.println();
+        System.out.println(border);
     }
 
     public MenuItem getItemById(int id) {

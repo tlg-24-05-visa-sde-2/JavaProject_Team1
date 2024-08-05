@@ -120,11 +120,11 @@ public class Controller {
         String headerFormat = "\t   | %-3s | %-8s | %-34s |";
         String totalFormat = "\t   | %-3s | $%-7.2f | %-34s |";
 
-        displayAnimatedString(border);
-        displayAnimatedString(String.format(titleFormat, "BILL"));
-        displayAnimatedString(border);
-        displayAnimatedString(String.format(headerFormat, "id", "price", "description"));
-        displayAnimatedString(border);
+        System.out.println(border);
+        System.out.printf((titleFormat) + "%n", "BILL");
+        System.out.println(border);
+        System.out.printf((headerFormat) + "%n", "id", "price", "description");
+        System.out.println(border);
 
         double total = 0.0;
         for (MenuItem item : menu.getOrderedItems()) {
@@ -132,20 +132,20 @@ public class Controller {
             if (description.length() > 34) {
                 description = description.substring(0, 31) + "...";
             }
-            displayAnimatedString(String.format(itemFormat, item.id(), item.price(), description));
+            System.out.printf((itemFormat) + "%n", item.id(), item.price(), description);
             total += item.price();
         }
 
-        displayAnimatedString(border);
-        displayAnimatedString(String.format(totalFormat, "", total, "Subtotal"));
+        System.out.println(border);
+        System.out.printf((totalFormat) + "%n", "", total, "Subtotal");
 
         double TAX_RATE = 0.089;
         double salesTax = total * TAX_RATE;
-        displayAnimatedString(String.format(totalFormat, "", salesTax, "Sales Tax"));
+        System.out.printf((totalFormat)+ "%n", "", salesTax, "Sales Tax");
 
         double result = total + salesTax;
-        displayAnimatedString(String.format(totalFormat, "", result, "Total"));
-        displayAnimatedString(border);
+        System.out.printf((totalFormat)+ "%n", "", result, "Total");
+        System.out.println(border);
 
         blankLines(2);
         System.out.println(" Server: Would you like to leave a tip? [y/n]");
@@ -174,23 +174,13 @@ public class Controller {
                 }
             }
 
-            displayAnimatedString(border);
-            displayAnimatedString(String.format(totalFormat, "", tipAmount, "Tip Amount"));
+            System.out.println(border);
+            System.out.printf((totalFormat)+ "%n", "", tipAmount, "Tip Amount");
             double finalTotal = result + tipAmount;
-            displayAnimatedString(String.format(totalFormat, "", finalTotal, "Final Total"));
-            displayAnimatedString(border);
+            System.out.printf((totalFormat)+ "%n", "", finalTotal, "Final Total");
+            System.out.println(border);
         }
     }
-
-    private void displayAnimatedString(String str) {
-        blankLines(1);
-        for (int i = 0; i < str.length(); i++) {
-            System.out.print(str.charAt(i));
-            pause(2);
-        }
-        System.out.println();
-    }
-
 
     private void pay() {
         blankLines(2);

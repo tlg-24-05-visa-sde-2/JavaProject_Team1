@@ -47,10 +47,9 @@ public class Animations {
                         \s
                         \s
                 """;
-        for (int i = 0; i < titleLogo.length(); i++) {
-            System.out.print(titleLogo.charAt(i));
-            pause(1);
-        }
+
+        System.out.print(titleLogo);
+
         blankLines(1);
         System.out.print(" Loading");
         for (int i = 0; i < 7; i++) {
@@ -97,10 +96,8 @@ public class Animations {
                                                 + +         +++   +                                  \s
                                                              +                                       \s
                 """;
-        for (int i = 0; i < hostLogo.length(); i++) {
-            System.out.print(hostLogo.charAt(i));
-            pause(1);
-        }
+        System.out.print(hostLogo);
+
         pause(1000);
     }
 
@@ -136,10 +133,8 @@ public class Animations {
                                                                                                             \s
                                                                                                             \s
                 """;
-        for (int i = 0; i < tableLogo.length(); i++) {
-            System.out.print(tableLogo.charAt(i));
-            pause(1);
-        }
+
+        System.out.print(tableLogo);
     }
 
     public void server() {
@@ -177,10 +172,7 @@ public class Animations {
               \s
                                                                                  \s
                \s""";
-        for (int i = 0; i < serverLogo.length(); i++) {
-            System.out.print(serverLogo.charAt(i));
-            pause(1);
-        }
+        System.out.print(serverLogo);
     }
 
     public void food() {
@@ -226,10 +218,7 @@ public class Animations {
                           ++    ++     ++            +          ++                   \s
                            +++++                      ++++++++++                     \s
                 """;
-        for (int i = 0; i < foodLogo.length(); i++) {
-            System.out.print(foodLogo.charAt(i));
-            pause(1);
-        }
+        System.out.print(foodLogo);
     }
 
     public void cook() {
@@ -289,10 +278,7 @@ public class Animations {
                                                                          + +                         + +                     \s
 
                 """;
-        for (int j = 0; j < cookLogo.length(); j++) {
-            System.out.print(cookLogo.charAt(j));
-            pause(1);
-        }
+        System.out.print(cookLogo);
     }
 
     public void finalMeal() {
@@ -331,10 +317,7 @@ public class Animations {
                                                  +++++++                      +++++++                              \s
 
                         """;
-        for (int i = 0; i < finalMealLogo.length(); i++) {
-            System.out.print(finalMealLogo.charAt(i));
-            pause(1);
-        }
+        System.out.print(finalMealLogo);
     }
 
         public void payment() {
@@ -395,10 +378,8 @@ public class Animations {
                                                                                        ++++                             +++ ++                 \s
                                                                                         +++++++++++++++++++++++++++++++++++ +                  \s
                                \s""";
-            for (int i = 0; i < paymentAnimation.length(); i++) {
-                System.out.print(paymentAnimation.charAt(i));
-                pause(1);
-            }
+
+            System.out.print(paymentAnimation);
             blankLines(1);
             System.out.print(" Payment processing");
             for (int i = 0; i < 7; i++) {
