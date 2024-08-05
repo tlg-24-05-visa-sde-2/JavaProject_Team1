@@ -17,16 +17,16 @@ public class Menu {
 
     public void displayMenu() {
         displayMenuSection("COMBOS  ", MenuItem.Type.COMBO);
-        System.out.println();
         displayMenuSection("DRINKS  ", MenuItem.Type.DRINK);
     }
 
     private void displayMenuSection(String sectionTitle, MenuItem.Type type) {
-        String border = "\t   +=====+==========+====================================+";
-        String titleFormat = "\t   | %-51s |";
-        String itemFormat = "\t   | %-3d | $%-7.2f | %-34s |";
-        String headerFormat = "\t   | %-3s | %-8s | %-34s |";
+        String border = "   +=====+==========+===============================================+";
+        String titleFormat = "   | %-62s |";
+        String itemFormat = "   | %-3d | $%-7.2f | %-45s |";
+        String headerFormat = "   | %-3s | %-8s | %-45s |";
 
+        blankLines(1);
         System.out.println(border);
         System.out.printf((titleFormat) + "%n", sectionTitle);
         System.out.println(border);
@@ -36,8 +36,8 @@ public class Menu {
         for (MenuItem item : menuItems) {
             if (item.type() == type) {
                 String description = item.description();
-                if (description.length() > 34) {
-                    description = description.substring(0, 31) + "...";
+                if (description.length() > 45) {
+                    description = description.substring(0, 45) + "...";
                 }
                 String formattedItem = String.format(itemFormat,
                         item.id(), item.price(), description);
@@ -45,6 +45,7 @@ public class Menu {
             }
         }
         System.out.println(border);
+        blankLines(2);
     }
 
     public MenuItem getItemById(int id) {
